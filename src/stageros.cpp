@@ -275,13 +275,13 @@ StageNode::cmdvelReceived(int idx, const boost::shared_ptr<geometry_msgs::Twist 
 void
 StageNode::poseReceived(int r, const boost::shared_ptr<geometry_msgs::Pose2D const>& msg)
 {
-    boost::mutex::scoped_lock lock(msg_lock);
     Stg::Pose p;
     p.x = msg->x;
     p.y = msg->y;
     p.z = 0;
     p.a = msg->theta;
-    this->positionmodels[r]->SetPose(p);
+    
+    this->positionmodels[r]->SetGlobalPose(p);
     this->positionmodels[r]->SetStall(false);
 }
 
